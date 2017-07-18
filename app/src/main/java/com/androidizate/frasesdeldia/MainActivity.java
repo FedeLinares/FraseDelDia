@@ -3,6 +3,7 @@ package com.androidizate.frasesdeldia;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.ArrayList;
@@ -10,31 +11,41 @@ import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+    Button botonFrase;
+    EditText muestroFrase;
+    List<String> listaFrase = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.btn_obtener_frase).setOnClickListener(new View.OnClickListener() {
+        botonFrase = (Button) findViewById(R.id.btn_obtener_frase);
+        muestroFrase = (EditText) findViewById(R.id.tv_frase);
+        crearFrases();
+        botonFrase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText loTvFrase = (EditText)findViewById(R.id.tv_frase);
-                List<String> loListaDeFrases = new ArrayList<String>();
-                loListaDeFrases.add("Va a ser un buen dia");
-                loListaDeFrases.add("Ojo por ojo");
-                loListaDeFrases.add("A quien mal anda");
-                loListaDeFrases.add("Vamos a tomar algo");
-                loListaDeFrases.add("Frase incompleta");
-                loListaDeFrases.add("Va a ser un buen dia 6");
-                loListaDeFrases.add("Va a ser un buen dia 7");
-                loListaDeFrases.add("Va a ser un buen dia 8");
-                loListaDeFrases.add("Va a ser un buen dia 9");
-                loListaDeFrases.add("Va a ser un buen dia 10");
-
-                Random rand = new Random();
-                int randomNum = rand.nextInt((9 - 0) + 1) + 0;
-                loTvFrase.setText(loListaDeFrases.get(randomNum));
+                muestroFrase.setText(listaFrase.get(seleccionFrase()));
             }
         });
+
+    }
+
+    private void crearFrases() {
+        listaFrase.add("Va a ser un buen dia");
+        listaFrase.add("Ojo por ojo");
+        listaFrase.add("A quien mal anda");
+        listaFrase.add("Vamos a tomar algo");
+        listaFrase.add("Frase incompleta");
+        listaFrase.add("Va a ser un buen dia 6");
+        listaFrase.add("Va a ser un buen dia 7");
+        listaFrase.add("Va a ser un buen dia 8");
+        listaFrase.add("Va a ser un buen dia 9");
+        listaFrase.add("Va a ser un buen dia 10");
+    }
+
+    private int seleccionFrase() {
+        Random rand = new Random();
+        return rand.nextInt(10);
     }
 }
